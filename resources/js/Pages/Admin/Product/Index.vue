@@ -9,6 +9,6 @@ import AdminLayout from '../Components/AdminLayout.vue';
 import ProductList from './ProductList.vue';
 
 defineProps({
-    products: Array
+    products: Object
 })
 </script>

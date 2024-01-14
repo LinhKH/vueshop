@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Admin\ProductResource;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
@@ -15,12 +16,12 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with(['brand', 'category', 'product_images'])->get();
+        $products = Product::with(['brand', 'category', 'product_images'])->paginate(5);
         $brands = Brand::get();
         $categories = Category::get();
 
         return Inertia::render('Admin/Product/Index', [
-            'products' => $products,
+            'products' => ProductResource::collection($products),
             'brands' => $brands,
             'categories' => $categories
         ]);
