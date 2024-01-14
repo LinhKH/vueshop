@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import AdminLayout from '../components/AdminLayout.vue';
+import AdminLayout from '../Components/AdminLayout.vue';
 import ProductList from './ProductList.vue';
 
 defineProps({
