@@ -51,8 +51,8 @@ const openEditModal = (product, index) => {
     price.value = product.price;
     quantity.value = product.quantity;
     description.value = product.description;
-    brand_id.value = product.brand_id;
-    category_id.value = product.category_id;
+    brand_id.value = product.brand.id;
+    category_id.value = product.category.id;
     product_images.value = product.product_images;
 
     editMode.value = true;
@@ -268,7 +268,7 @@ const deleteProduct = (product, index) => {
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                         <textarea id="message" rows="4" v-model="description"
                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Leave a comment..."></textarea>
+                            placeholder="Leave a description..."></textarea>
 
                     </div>
 
@@ -293,8 +293,8 @@ const deleteProduct = (product, index) => {
                         <img class="w-24 h-20 rounded" :src="`/${pimage.image}`" alt="">
                         <span
                             class="absolute top-0 right-8 transform -translate-y-1/2 w-3.5 h-3.5 bg-red-400 border-2 border-white dark:border-gray-800 rounded-full">
-                            <span @click="deleteImage(pimage, index)"
-                                class="text-white text-xs font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">x</span>
+                            <button @click="deleteImage(pimage, index)"
+                                class="text-white text-xs font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">x</button>
                         </span>
                     </div>
                 </div>
