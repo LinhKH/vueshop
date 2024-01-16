@@ -10,15 +10,10 @@ use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\ProductListController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 
 Route::get('/', [UserController::class, 'index'])->name('home');
 Route::get('/dashboard',[DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -34,7 +29,6 @@ Route::middleware('auth')->group(function () {
 });
 
 //add to cart 
-
 Route::prefix('cart')->controller(CartController::class)->group(function () {
     Route::get('view','view')->name('cart.view');
     Route::post('store/{product}','store')->name('cart.store');
@@ -47,17 +41,6 @@ Route::prefix('products')->controller(ProductListController::class)->group(funct
     Route::get('/','index')->name('products.index');
     
 });
-
-
-
-
-
-
-
-
-
-
-
 
 // admin routes
 Route::middleware(['redirectAdmin'])->prefix('admin')->group(function () {
