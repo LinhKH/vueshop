@@ -1,16 +1,9 @@
-<template>
-    <Navbar />
-
-    <slot></slot>
-
-    <Footer />
-</template>
-
 <script setup>
-import { onMounted } from 'vue';
-import { initFlowbite } from 'flowbite';
-import Navbar from './Navbar.vue';
+import { onMounted } from 'vue'
+import { initFlowbite } from 'flowbite'
+import Header from './Header.vue';
 import Footer from './Footer.vue';
+import Hero from './Hero.vue';
 
 // initialize components based on data attribute selectors
 onMounted(() => {
@@ -18,4 +11,19 @@ onMounted(() => {
 })
 
 
+
 </script>
+<template>
+    <!-- header -->
+    <Header></Header>
+    <!-- end -->
+    <!-- main content -->
+    
+    <slot />
+    <!-- end -->
+    <!-- footer -->
+
+    <Footer></Footer>
+
+    <!-- end -->
+</template>
