@@ -15,17 +15,16 @@ class ProductListController extends Controller
     public function index()
     {
         $products = Product::with('category', 'brand', 'product_images');
-        // $filterProducts = $products->filtered()->paginate(9)->withQueryString();
-        $filterProducts = $products->filtered()->paginate(9);
+        $filterProducts = $products->filtered()->paginate(9)->withQueryString();
 
         $categories = Category::get();
         $brands = Brand::get();
-        
+
         return Inertia::render(
             'User/ProductList',
             [
-                'categories'=>$categories,
-                'brands'=>$brands,
+                'categories' => $categories,
+                'brands' => $brands,
                 'products' => ProductResource::collection($filterProducts)
             ]
         );

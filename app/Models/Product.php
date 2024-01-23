@@ -64,6 +64,19 @@ class Product extends Model
             ->when(request('categories'), function (Builder $q) {
                 $q->whereIn('category_id', request('categories'));
             })
+            ->when(request('newest') === 1, function (Builder $q) {
+                $q->orderBy('id', 'DESC');
+            })
+
+            ->when(
+                request('price') !== null,
+                fn (Builder $builder) => $builder->when(
+                    request('price') == 'asc',
+                    fn (Builder $builder) => $builder->orderBy('price', 'asc'),
+                    fn (Builder $builder) => $builder->orderBy('price', 'desc')
+                )
+            )
+
             ->when(request('prices'), function (Builder $q) {
                 $q->whereBetween('price', [
                     request('prices.from', 0),

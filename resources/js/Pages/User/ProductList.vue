@@ -1,6 +1,7 @@
 <script setup>
 import UserLayouts from './Layouts/UserLayouts.vue';
-import { ref, watch } from 'vue'
+import { ref, watch } from 'vue';
+import { Link } from '@inertiajs/vue3';
 import {
     Dialog,
     DialogPanel,
@@ -20,11 +21,9 @@ import Products from '../User/Components/Products.vue'
 import SecondaryButtonVue from '@/Components/SecondaryButton.vue';
 import { router, useForm } from '@inertiajs/vue3';
 const sortOptions = [
-    { name: 'Most Popular', href: '#', current: true },
-    { name: 'Best Rating', href: '#', current: false },
-    { name: 'Newest', href: '#', current: false },
-    { name: 'Price: Low to High', href: '#', current: false },
-    { name: 'Price: High to Low', href: '#', current: false },
+    { name: 'Newest', href: 'products?newest=1', current: true },
+    { name: 'Price: Low to High', href: 'products?price=asc', current: false },
+    { name: 'Price: High to Low', href: 'products?price=desc', current: false },
 ]
 
 
@@ -176,9 +175,10 @@ function updateFilteredProducts() {
                                         class="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
                                         <div class="py-1">
                                             <MenuItem v-for="option in sortOptions" :key="option.name" v-slot="{ active }">
-                                            <a :href="option.href"
-                                                :class="[option.current ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm']">{{
-                                                    option.name }}</a>
+                                            <Link :href="option.href"
+                                                :class="[option.current ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm']">
+                                            {{
+                                                option.name }}</Link>
                                             </MenuItem>
                                         </div>
                                     </MenuItems>
@@ -302,4 +302,5 @@ function updateFilteredProducts() {
             </div>
         </div>
 
-    </UserLayouts></template>
+    </UserLayouts>
+</template>
